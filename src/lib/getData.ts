@@ -1,11 +1,11 @@
-import prisma from "./prisma";
+import prisma from './prisma';
 
 export async function getAllPosts() {
   return await prisma.post.findMany();
 }
 
 export async function getPostBySlug(slug: string) {
-  return await prisma.post.findFirst({
+  const res = await prisma.post.findFirst({
     where: {
       slug: slug,
     },
@@ -13,4 +13,6 @@ export async function getPostBySlug(slug: string) {
       author: true,
     },
   });
+  console.log('res', res);
+  return res;
 }
